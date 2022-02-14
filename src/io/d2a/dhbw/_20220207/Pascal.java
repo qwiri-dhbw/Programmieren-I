@@ -1,6 +1,5 @@
 package io.d2a.dhbw._20220207;
 
-import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

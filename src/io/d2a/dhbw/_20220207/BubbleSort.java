@@ -1,5 +1,8 @@
 package io.d2a.dhbw._20220207;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 public class BubbleSort {
@@ -10,7 +13,7 @@ public class BubbleSort {
 
         boolean swaped = false;
         do {
-            for (int i = 0; i < array.length -1; i++) {
+            for (int i = 0; i < array.length - 1; i++) {
                 if (array[i] > array[i + 1]) {
                     final int temp = array[i];
                     array[i] = array[i + 1];
