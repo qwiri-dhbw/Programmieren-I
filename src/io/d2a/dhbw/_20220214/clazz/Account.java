@@ -1,4 +1,4 @@
-package io.d2a.dhbw._20220214;
+package io.d2a.dhbw._20220214.clazz;
 
 public class Account {
 

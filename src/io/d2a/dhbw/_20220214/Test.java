@@ -1,11 +1,15 @@
 package io.d2a.dhbw._20220214;
 
+import io.d2a.dhbw._20220214.clazz.Account;
+import io.d2a.dhbw._20220214.clazz.Point;
+import io.d2a.dhbw._20220214.clazz.Radio;
 import io.d2a.dhbw.eeee.annotations.Default;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
 import io.d2a.dhbw.eeee.annotations.ForceRun;
 import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
+import java.util.Scanner;
 
 public class Test {
 
@@ -45,7 +49,6 @@ public class Test {
             + pointA.distance(pointB));
     }
 
-    @ForceRun
     @Entrypoint("Account")
     public void testAccount(
         @Prompt("Startguthaben") @Min(1) @Max(10000) @Default("5000") int start,

@@ -1,8 +1,11 @@
 package io.d2a.dhbw.eeee.wrapper;
 
+import com.sun.jdi.request.WatchpointRequest;
+import io.d2a.dhbw.eeee.wrapper.wrappers.BooleanWrapper;
 import io.d2a.dhbw.eeee.wrapper.wrappers.DoubleWrapper;
 import io.d2a.dhbw.eeee.wrapper.wrappers.IntegerWrapper;
 import io.d2a.dhbw.eeee.wrapper.wrappers.ScannerWrapper;
+import io.d2a.dhbw.eeee.wrapper.wrappers.ShortWrapper;
 import io.d2a.dhbw.eeee.wrapper.wrappers.StringWrapper;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +26,14 @@ public class Wrappers {
         final DoubleWrapper doubleWrapper = new DoubleWrapper();
         WRAPPERS.put(double.class, doubleWrapper);
         WRAPPERS.put(Double.class, doubleWrapper);
+
+        final ShortWrapper shortWrapper = new ShortWrapper();
+        WRAPPERS.put(short.class, shortWrapper);
+        WRAPPERS.put(Short.class, shortWrapper);
+
+        final BooleanWrapper booleanWrapper = new BooleanWrapper();
+        WRAPPERS.put(boolean.class, booleanWrapper);
+        WRAPPERS.put(Boolean.class, booleanWrapper);
     }
 
 }

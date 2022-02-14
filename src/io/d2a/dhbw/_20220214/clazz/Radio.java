@@ -1,14 +1,10 @@
-package io.d2a.dhbw._20220214;
+package io.d2a.dhbw._20220214.clazz;
 
 public class Radio {
 
     private boolean on;
     private int volume;
     private float frequency;
-
-    public Radio() {
-
-    }
 
     public Radio(final boolean on, final int volume, final float frequency) {
         this.on = on;
