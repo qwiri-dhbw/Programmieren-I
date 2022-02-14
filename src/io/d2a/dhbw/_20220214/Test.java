@@ -3,9 +3,9 @@ package io.d2a.dhbw._20220214;
 import io.d2a.dhbw.eeee.annotations.Default;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
 import io.d2a.dhbw.eeee.annotations.ForceRun;
-import io.d2a.dhbw.eeee.annotations.Prompt;
-import io.d2a.dhbw.eeee.annotations.number.Max;
-import io.d2a.dhbw.eeee.annotations.number.Min;
+import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
+import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
+import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
 
 public class Test {
 

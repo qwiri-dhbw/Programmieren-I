@@ -1,4 +1,4 @@
-package io.d2a.dhbw.eeee.annotations;
+package io.d2a.dhbw.eeee.annotations.parameters.string;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface Prompt {
+public @interface Trim {
 
-    String value();
+    boolean value() default true;
 
 }

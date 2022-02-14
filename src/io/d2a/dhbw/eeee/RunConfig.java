@@ -1,7 +1,7 @@
 package io.d2a.dhbw.eeee;
 
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
-import io.d2a.dhbw.eeee.annotations.Prompt;
+import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
 import io.d2a.dhbw.eeee.wrapper.ParameterWrapper;
 import io.d2a.dhbw.eeee.wrapper.Wrappers;
 import java.lang.reflect.Constructor;

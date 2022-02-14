@@ -1,6 +1,9 @@
 package io.d2a.dhbw.eeee.wrapper;
 
-import io.d2a.dhbw.eeee.annotations.ScannerWrapper;
+import io.d2a.dhbw.eeee.wrapper.wrappers.DoubleWrapper;
+import io.d2a.dhbw.eeee.wrapper.wrappers.IntegerWrapper;
+import io.d2a.dhbw.eeee.wrapper.wrappers.ScannerWrapper;
+import io.d2a.dhbw.eeee.wrapper.wrappers.StringWrapper;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

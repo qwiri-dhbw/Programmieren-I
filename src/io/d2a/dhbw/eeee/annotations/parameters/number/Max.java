@@ -1,4 +1,4 @@
-package io.d2a.dhbw.eeee.annotations.number;
+package io.d2a.dhbw.eeee.annotations.parameters.number;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface Min {
+public @interface Max {
+
     double value();
+
 }

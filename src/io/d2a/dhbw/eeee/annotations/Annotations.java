@@ -1,7 +1,7 @@
 package io.d2a.dhbw.eeee.annotations;
 
-import io.d2a.dhbw.eeee.annotations.number.Max;
-import io.d2a.dhbw.eeee.annotations.number.Min;
+import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
+import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Parameter;
 
@@ -19,6 +19,9 @@ public class Annotations {
     }
 
     public static String range(final Double min, final Double max) {
+        if (min == null && max == null) {
+            return "";
+        }
         final StringBuilder bob = new StringBuilder();
         bob.append("[");
         if (min != null) {
