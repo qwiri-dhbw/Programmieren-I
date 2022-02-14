@@ -9,9 +9,16 @@ import io.d2a.dhbw.eeee.annotations.ForceRun;
 import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
+import io.d2a.dhbw.eeee.inject.Inject;
 import java.util.Scanner;
 
 public class Test {
+
+    @Inject
+    private Scanner scanner;
+
+    @Inject("args")
+    private String[] args;
 
     @Entrypoint("Radio")
     public void testRadio() {
@@ -49,7 +56,6 @@ public class Test {
             + pointA.distance(pointB));
     }
 
-    @ForceRun
     @Entrypoint("Account")
     public void testAccount(
         @Prompt("Startguthaben") @Min(1) @Max(10000) @Default("5000") int start,
@@ -66,6 +72,12 @@ public class Test {
         System.out.println(account);
         account.processPayment((short) 2000);
         System.out.println(account);
+    }
+
+    @Entrypoint("echo")
+    public void runEcho() {
+        final String input = this.scanner.nextLine();
+        System.out.println("Echo! " + input);
     }
 
 }

@@ -3,6 +3,7 @@ package io.d2a.dhbw.eeee;
 import io.d2a.dhbw._20220214.Test;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
 import io.d2a.dhbw.eeee.annotations.ForceRun;
+import io.d2a.dhbw.eeee.inject.Injector;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,72 @@ public class Starter {
 
     public static final Class<?> FIRST_ENTRY = Test.class;
 
-    public static void main(String[] args) throws Exception {
+    private static RunConfig getForcedConfig(final List<? extends RunConfig> list) {
+        for (final RunConfig config : list) {
+            if (config.method.isAnnotationPresent(ForceRun.class)) {
+                return config;
+            }
+        }
+        return null;
+    }
+
+    private static void printConfigs(final List<? extends RunConfig> list) {
+        // print method selection
         int i = 0;
+        for (final RunConfig method : list) {
+            // print method number and name
+            System.out.printf("%d. %s::%s@%s (%s)%n",
+                ++i,
+                FIRST_ENTRY.getSimpleName(),
+                method.entrypoint.value(),
+                method.method.getName(),
+                formatTypes(method.method.getParameterTypes(), false)
+            );
+        }
+    }
+
+    private static RunConfig select(final Scanner scanner, final List<? extends RunConfig> list) {
+        // if there's only 1 method to run, just select the first
+        if (list.size() == 1) {
+            return list.get(0);
+        }
+        while (true) {
+            printConfigs(list);
+            System.out.printf("[?] Select Method to run [1-%d]: ", list.size());
+
+            final String line = scanner.nextLine().trim();
+            try {
+                final int i = Integer.parseInt(line);
+                if (i > 0 && i <= list.size()) {
+                    return list.get(i - 1);
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+    }
+
+    public static String formatTypes(final Class<?>[] types, boolean sh) {
+        final StringBuilder bob = new StringBuilder();
+        for (final Class<?> type : types) {
+            if (bob.length() > 0) {
+                bob.append(",");
+            }
+            if (sh) {
+                bob.append(type.getSimpleName().charAt(0));
+            } else {
+                bob.append(type.getSimpleName());
+            }
+        }
+        return bob.toString();
+    }
+
+    public static void main(String[] args) throws Exception {
+        final Scanner scanner = new Scanner(System.in);
+
+        final Injector injector = new Injector()
+            .register(Scanner.class, scanner)
+            .register(String[].class, args, "args");
+
         final List<RunConfig> methods = new ArrayList<>();
 
         // first, find any entrypoint method
@@ -23,67 +88,26 @@ public class Starter {
                 continue;
             }
             final Entrypoint entrypoint = method.getAnnotation(Entrypoint.class);
-            System.out.printf("%d. %s::%s@%s%n", ++i,
-                FIRST_ENTRY.getSimpleName(), entrypoint.value(), method.getName());
-
             final RunConfig config = new RunConfig(
                 method, entrypoint, FIRST_ENTRY
             );
-
             methods.add(config);
         }
 
-        if (i == 0) {
+        // if no method was found, simply exit
+        if (methods.size() == 0) {
             System.out.println("Error: cannot find entrypoint in class.");
             return;
         }
 
-        final Scanner scanner = new Scanner(System.in);
-
         // auto select first method if only one method exists in that class
-        RunConfig config = null;
-
-        // check if there's an force method
-        for (final RunConfig method : methods) {
-            if (method.method.isAnnotationPresent(ForceRun.class)) {
-                config = method;
-                break;
-            }
-        }
-
-        if (config == null) {
-            if (i == 1) {
-                config = methods.get(0);
-            } else {
-                System.out.print("Select Method to run [1-" + i + "]: ");
-
-                int a;
-                for (; ; ) {
-                    try {
-                        a = scanner.nextInt();
-                        scanner.nextLine();
-                        if (a < 1 || a > methods.size()) {
-                            System.out.print("Please use a number in the valid range! > ");
-                        }
-                        break;
-                    } catch (final NumberFormatException nfex) {
-                        System.out.print("Please use only numbers! > ");
-                    }
-                }
-                config = methods.get(a - 1);
-            }
-        }
-
-        // get n-th number
-        if (config == null) {
+        RunConfig config = getForcedConfig(methods);
+        if (config == null && (config = select(scanner, methods)) == null) {
             System.out.println("Invalid run config.");
             return;
         }
 
-        System.out.printf("Invoking method %s from class %s ...%n",
-            config.method.getName(), config.clazz.getSimpleName());
-
-        config.invoke(scanner);
+        config.invoke(scanner, injector);
     }
 
 }

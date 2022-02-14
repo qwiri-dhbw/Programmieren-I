@@ -13,7 +13,8 @@ public class BooleanWrapper extends DefaultRangeWrapper<Boolean> {
         "true",
         "yes",
         "1",
-        "ja"
+        "ja",
+        "jo"
     ));
 
     @Override
@@ -25,4 +26,5 @@ public class BooleanWrapper extends DefaultRangeWrapper<Boolean> {
     public Prompt prompt() {
         return NamedRangePrompt.of("bool");
     }
+
 }
