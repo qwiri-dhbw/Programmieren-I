@@ -19,19 +19,29 @@ public class Annotations {
     }
 
     public static String range(final Double min, final Double max) {
+        return range(min, max, false);
+    }
+
+    public static String range(final Double min, final Double max, final boolean i) {
         if (min == null && max == null) {
             return "";
         }
         final StringBuilder bob = new StringBuilder();
-        bob.append("[");
         if (min != null) {
-            bob.append(min);
+            if (i) {
+                bob.append(min.intValue());
+            } else {
+                bob.append(min);
+            }
         }
         bob.append('-');
         if (max != null) {
-            bob.append(max);
+            if (i) {
+                bob.append(max.intValue());
+            } else {
+                bob.append(max);
+            }
         }
-        bob.append("]");
         return bob.toString();
     }
 
@@ -52,8 +62,8 @@ public class Annotations {
         final String range = Annotations.range(min, max);
         final StringBuilder bob = new StringBuilder();
         bob.append("[").append(type).append("] ");
-        if (range.length() > 2) {
-            bob.append(range).append(' ');
+        if (range.length() > 0) {
+            bob.append('[').append(range).append("] ");
         }
         bob.append(prompt);
         if (def != null) {

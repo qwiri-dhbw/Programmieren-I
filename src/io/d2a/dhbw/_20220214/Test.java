@@ -49,6 +49,7 @@ public class Test {
             + pointA.distance(pointB));
     }
 
+    @ForceRun
     @Entrypoint("Account")
     public void testAccount(
         @Prompt("Startguthaben") @Min(1) @Max(10000) @Default("5000") int start,

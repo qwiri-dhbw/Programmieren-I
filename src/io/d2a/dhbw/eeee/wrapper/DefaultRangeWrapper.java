@@ -3,16 +3,27 @@ package io.d2a.dhbw.eeee.wrapper;
 import io.d2a.dhbw.eeee.annotations.Annotations;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
+import io.d2a.dhbw.eeee.prompt.Prompt;
 import java.lang.reflect.Parameter;
 import java.util.Scanner;
 
-public abstract class MinMaxDefWrapper<T> implements ParameterWrapper<T> {
+public abstract class DefaultRangeWrapper<T> implements ParameterWrapper<T> {
 
     public abstract T wrapValue(final String def);
 
-    public abstract boolean test(T t, Double min, Double max);
+    ///
 
-    public abstract String promptType();
+    public boolean testRange(final T t, final Double min, final Double max) {
+        return true;
+    }
+
+    public boolean testParameter(final T t, final Parameter parameter) {
+        return true;
+    }
+
+    ///
+
+    public abstract Prompt prompt();
 
     public String generatePrompt(
         final String prompt,
@@ -29,7 +40,8 @@ public abstract class MinMaxDefWrapper<T> implements ParameterWrapper<T> {
         final Double min = Annotations.get(Min.class, parameter);
         final Double max = Annotations.get(Max.class, parameter);
         final String def = Annotations.def(parameter);
-        final String displayPrompt = this.generatePrompt(prompt, this.promptType(), min, max, def);
+
+        final String displayPrompt = this.prompt().prompt(parameter, prompt, def);
 
         while (true) {
             System.out.print(displayPrompt);
@@ -43,7 +55,7 @@ public abstract class MinMaxDefWrapper<T> implements ParameterWrapper<T> {
 
             try {
                 final T d = this.wrapValue(input);
-                if (!this.test(d, min, max)) {
+                if (!this.testRange(d, min, max) || !this.testParameter(d, parameter)) {
                     continue;
                 }
                 return d;

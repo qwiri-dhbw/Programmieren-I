@@ -1,9 +1,11 @@
 package io.d2a.dhbw.eeee.wrapper.wrappers;
 
 import io.d2a.dhbw.eeee.annotations.Annotations;
-import io.d2a.dhbw.eeee.wrapper.MinMaxDefWrapper;
+import io.d2a.dhbw.eeee.prompt.NamedRangePrompt;
+import io.d2a.dhbw.eeee.prompt.Prompt;
+import io.d2a.dhbw.eeee.wrapper.DefaultRangeWrapper;
 
-public class ShortWrapper extends MinMaxDefWrapper<Short> {
+public class ShortWrapper extends DefaultRangeWrapper<Short> {
 
     @Override
     public Short wrapValue(final String def) {
@@ -11,13 +13,13 @@ public class ShortWrapper extends MinMaxDefWrapper<Short> {
     }
 
     @Override
-    public boolean test(final Short val, final Double min, final Double max) {
+    public boolean testRange(final Short val, final Double min, final Double max) {
         return Annotations.testRange(min, max, val);
     }
 
     @Override
-    public String promptType() {
-        return "short";
+    public Prompt prompt() {
+        return NamedRangePrompt.of("short");
     }
 
 }
