@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RunConfig {
+public class EntryMethod {
 
-    final Method method;
-    final Entrypoint entrypoint;
-    final Class<?> clazz;
+    public final Method method;
+    public final Entrypoint entrypoint;
+    public final Class<?> clazz;
 
-    public RunConfig(final Method method, final Entrypoint entrypoint, final Class<?> clazz) {
+    public EntryMethod(final Method method, final Entrypoint entrypoint, final Class<?> clazz) {
         this.method = method;
         this.entrypoint = entrypoint;
         this.clazz = clazz;
