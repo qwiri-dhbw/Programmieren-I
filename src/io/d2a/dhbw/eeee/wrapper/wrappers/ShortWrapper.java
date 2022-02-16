@@ -9,6 +9,9 @@ public class ShortWrapper extends DefaultRangeWrapper<Short> {
 
     @Override
     public Short wrapValue(final String def) {
+        if (def.length() == 0) {
+            return (short) 0;
+        }
         return Short.parseShort(def);
     }
 

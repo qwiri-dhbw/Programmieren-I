@@ -9,6 +9,9 @@ public class DoubleWrapper extends DefaultRangeWrapper<Double> {
 
     @Override
     public Double wrapValue(final String def) {
+        if (def.length() == 0) {
+            return 0D;
+        }
         return Double.parseDouble(def);
     }
 

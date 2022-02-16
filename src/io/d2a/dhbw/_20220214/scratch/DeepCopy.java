@@ -5,14 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public class C {
-
-    public static void main(String[] args) throws Exception {
-        final E e = new E(200, 150);
-        final E copy = deepCopy(e, E.class);
-        System.out.println(e.toString());
-        System.out.println(copy.toString());
-    }
+public class DeepCopy {
 
     public static <T> T deepCopy(final T in, final Class<T> clazz) throws Exception {
         // check if in is cloneable

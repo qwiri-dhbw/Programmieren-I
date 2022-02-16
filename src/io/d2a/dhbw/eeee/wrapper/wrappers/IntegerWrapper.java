@@ -11,6 +11,9 @@ public class IntegerWrapper extends DefaultRangeWrapper<Integer> {
 
     @Override
     public Integer wrapValue(final String def) {
+        if (def.length() == 0) {
+            return 0;
+        }
         return Integer.parseInt(def);
     }
 
