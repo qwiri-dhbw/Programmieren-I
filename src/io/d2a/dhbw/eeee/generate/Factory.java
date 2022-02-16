@@ -2,6 +2,7 @@ package io.d2a.dhbw.eeee.generate;
 
 import io.d2a.dhbw.eeee.EntryMethod;
 import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
+import io.d2a.dhbw.eeee.inject.Injector;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Scanner;
@@ -9,9 +10,18 @@ import java.util.Scanner;
 public class Factory {
 
     public static <T> T createClass(final Scanner scanner, final Class<T> clazz) throws Exception {
+        return createClass(scanner, clazz, null);
+    }
+
+    public static <T> T createClass(final Scanner scanner, final Class<T> clazz, final Injector injector) throws Exception {
         // create class
         final Constructor<T> constructor = clazz.getDeclaredConstructor();
         final T t = constructor.newInstance();
+
+        // inject fields
+        if (injector != null) {
+            injector.inject(t);
+        }
 
         // get all prompt values and request
         for (final Field field : clazz.getDeclaredFields()) {

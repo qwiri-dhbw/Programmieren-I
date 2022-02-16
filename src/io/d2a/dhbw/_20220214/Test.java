@@ -12,13 +12,16 @@ import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
 import io.d2a.dhbw.eeee.generate.Factory;
 import io.d2a.dhbw.eeee.inject.Inject;
+import io.d2a.dhbw.eeee.inject.Injector;
 import java.util.Scanner;
 
 public class Test {
 
     public static void main(String[] args) throws Exception {
         final Scanner scanner = new Scanner(System.in);
-        final Rectangle rect = Factory.createClass(scanner, Rectangle.class);
+        final Injector injector = new Injector()
+            .register(String[].class, args);
+        final Rectangle rect = Factory.createClass(scanner, Rectangle.class, injector);
         System.out.println(rect);
     }
 
