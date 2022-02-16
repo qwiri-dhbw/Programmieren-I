@@ -7,12 +7,13 @@ import java.lang.reflect.Parameter;
 
 public class Annotations {
 
-    public static Double get(final Class<? extends Annotation> clazz, final Parameter parameter) {
-        if (parameter.isAnnotationPresent(clazz)) {
+    public static Double get(final Class<? extends Annotation> clazz,
+        final AnnotationProvider provider) {
+        if (provider.get(clazz) != null) {
             if (clazz.equals(Min.class)) {
-                return parameter.getAnnotation(Min.class).value();
+                return provider.get(Min.class).value();
             } else if (clazz.equals(Max.class)) {
-                return parameter.getAnnotation(Max.class).value();
+                return provider.get(Max.class).value();
             }
         }
         return null;
@@ -72,9 +73,10 @@ public class Annotations {
         return bob.append(": ").toString();
     }
 
-    public static String def(final Parameter parameter) {
-        if (parameter.isAnnotationPresent(Default.class)) {
-            return parameter.getAnnotation(Default.class).value();
+    public static String def(final AnnotationProvider provider) {
+        final Default def = provider.get(Default.class);
+        if (def != null) {
+            return def.value();
         }
         return null;
     }

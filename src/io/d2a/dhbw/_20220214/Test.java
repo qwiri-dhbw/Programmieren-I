@@ -3,9 +3,9 @@ package io.d2a.dhbw._20220214;
 import io.d2a.dhbw._20220214.clazz.Account;
 import io.d2a.dhbw._20220214.clazz.Point;
 import io.d2a.dhbw._20220214.clazz.Radio;
+import io.d2a.dhbw.eeee.Starter;
 import io.d2a.dhbw.eeee.annotations.Default;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
-import io.d2a.dhbw.eeee.annotations.ForceRun;
 import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
@@ -13,6 +13,10 @@ import io.d2a.dhbw.eeee.inject.Inject;
 import java.util.Scanner;
 
 public class Test {
+
+    public static void main(String[] args) throws Exception {
+        Starter.main(args);
+    }
 
     @Inject
     private Scanner scanner;

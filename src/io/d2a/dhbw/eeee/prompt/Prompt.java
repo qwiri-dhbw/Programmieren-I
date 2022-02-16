@@ -1,9 +1,9 @@
 package io.d2a.dhbw.eeee.prompt;
 
-import java.lang.reflect.Parameter;
+import io.d2a.dhbw.eeee.annotations.AnnotationProvider;
 
 public interface Prompt {
 
-    String prompt(final Parameter parameter, final String prompt, final String def);
+    String prompt(final AnnotationProvider provider, final String prompt, final String def);
 
 }

@@ -1,13 +1,13 @@
 package io.d2a.dhbw.eeee.wrapper;
 
+import io.d2a.dhbw.eeee.annotations.AnnotationProvider;
 import io.d2a.dhbw.eeee.annotations.Annotations;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
 import io.d2a.dhbw.eeee.prompt.Prompt;
-import java.lang.reflect.Parameter;
 import java.util.Scanner;
 
-public abstract class DefaultRangeWrapper<T> implements ParameterWrapper<T> {
+public abstract class DefaultRangeWrapper<T> implements Wrapper<T> {
 
     public abstract T wrapValue(final String def);
 
@@ -17,7 +17,7 @@ public abstract class DefaultRangeWrapper<T> implements ParameterWrapper<T> {
         return true;
     }
 
-    public boolean testParameter(final T t, final Parameter parameter) {
+    public boolean testAnnotation(final T t, final AnnotationProvider provider) {
         return true;
     }
 
@@ -25,23 +25,13 @@ public abstract class DefaultRangeWrapper<T> implements ParameterWrapper<T> {
 
     public abstract Prompt prompt();
 
-    public String generatePrompt(
-        final String prompt,
-        final String type,
-        final Double min,
-        final Double max,
-        final String def
-    ) {
-        return Annotations.generatePrompt(prompt, type, min, max, def);
-    }
-
     @Override
-    public T wrap(final Scanner scanner, final String prompt, final Parameter parameter) {
-        final Double min = Annotations.get(Min.class, parameter);
-        final Double max = Annotations.get(Max.class, parameter);
-        final String def = Annotations.def(parameter);
+    public T wrap(final Scanner scanner, final String prompt, final AnnotationProvider provider) {
+        final Double min = Annotations.get(Min.class, provider);
+        final Double max = Annotations.get(Max.class, provider);
+        final String def = Annotations.def(provider);
 
-        final String displayPrompt = this.prompt().prompt(parameter, prompt, def);
+        final String displayPrompt = this.prompt().prompt(provider, prompt, def);
 
         while (true) {
             System.out.print(displayPrompt);
@@ -55,7 +45,7 @@ public abstract class DefaultRangeWrapper<T> implements ParameterWrapper<T> {
 
             try {
                 final T d = this.wrapValue(input);
-                if (!this.testRange(d, min, max) || !this.testParameter(d, parameter)) {
+                if (!this.testRange(d, min, max) || !this.testAnnotation(d, provider)) {
                     continue;
                 }
                 return d;

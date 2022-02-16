@@ -1,6 +1,5 @@
 package io.d2a.dhbw.eeee.wrapper;
 
-import com.sun.jdi.request.WatchpointRequest;
 import io.d2a.dhbw.eeee.wrapper.wrappers.BooleanWrapper;
 import io.d2a.dhbw.eeee.wrapper.wrappers.DoubleWrapper;
 import io.d2a.dhbw.eeee.wrapper.wrappers.IntegerWrapper;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 
 public class Wrappers {
 
-    public static final Map<Class<?>, ParameterWrapper<?>> WRAPPERS = new HashMap<>() {{
+    public static final Map<Class<?>, Wrapper<?>> WRAPPERS = new HashMap<>() {{
         put(String.class, new StringWrapper());
         put(Scanner.class, new ScannerWrapper());
     }};

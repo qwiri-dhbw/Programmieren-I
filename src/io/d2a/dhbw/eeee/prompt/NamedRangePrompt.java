@@ -1,9 +1,9 @@
 package io.d2a.dhbw.eeee.prompt;
 
+import io.d2a.dhbw.eeee.annotations.AnnotationProvider;
 import io.d2a.dhbw.eeee.annotations.Annotations;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
-import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,15 +23,19 @@ public class NamedRangePrompt implements Prompt {
     }
 
     @Override
-    public String prompt(final Parameter parameter, final String prompt, final String def) {
+    public String prompt(final AnnotationProvider provider, final String prompt, final String def) {
         this.map.put("prompt", p -> prompt);
         this.map.put("default", p -> def);
 
         String display = this.format;
         for (final Entry<String, Supplier> entry : this.map.entrySet()) {
+            String replacement = entry.getValue().replace(provider);
+            if (replacement == null) {
+                replacement = "";
+            }
             display = display.replace(
                 "%" + entry.getKey() + "%",
-                entry.getValue().replace(parameter)
+                replacement
             );
         }
         return display;
@@ -41,7 +45,7 @@ public class NamedRangePrompt implements Prompt {
 
     public interface Supplier {
 
-        String replace(final Parameter parameter);
+        String replace(final AnnotationProvider provider);
 
     }
 

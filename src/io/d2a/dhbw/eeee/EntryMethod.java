@@ -1,9 +1,10 @@
 package io.d2a.dhbw.eeee;
 
+import io.d2a.dhbw.eeee.annotations.AnnotationProvider;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
 import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
 import io.d2a.dhbw.eeee.inject.Injector;
-import io.d2a.dhbw.eeee.wrapper.ParameterWrapper;
+import io.d2a.dhbw.eeee.wrapper.Wrapper;
 import io.d2a.dhbw.eeee.wrapper.Wrappers;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -22,6 +23,33 @@ public class EntryMethod {
         this.method = method;
         this.entrypoint = entrypoint;
         this.clazz = clazz;
+    }
+
+    public static Object promptValue(
+        final Scanner scanner,
+        final Class<?> type,
+        final String prompt,
+        final AnnotationProvider provider
+    ) throws Exception {
+
+        final Wrapper<?> wrapper;
+        if (Wrapper.class.isAssignableFrom(type)) {
+            // get constructor
+            final Constructor<?> wrapperConstructor = type.getDeclaredConstructor();
+            wrapperConstructor.setAccessible(true);
+            wrapper = (Wrapper<?>) wrapperConstructor.newInstance();
+        } else {
+            wrapper = Wrappers.WRAPPERS.get(type);
+        }
+
+        // check if a wrapper is present for the paramter type
+        if (wrapper == null) {
+            throw new IllegalArgumentException("cannot find wrapper for parameter " +
+                type.getSimpleName());
+        }
+
+        // execute wrapper
+        return wrapper.wrap(scanner, prompt, provider);
     }
 
     public void invoke(final Scanner scanner, final Injector injector) throws Exception {
@@ -47,24 +75,6 @@ public class EntryMethod {
             System.out.println();
 
             for (final Parameter parameter : this.method.getParameters()) {
-                final ParameterWrapper<?> wrapper;
-                if (ParameterWrapper.class.isAssignableFrom(parameter.getType())) {
-                    // get constructor
-                    final Constructor<?> wrapperConstructor = parameter.getType()
-                        .getDeclaredConstructor();
-                    wrapperConstructor.setAccessible(true);
-                    wrapper = (ParameterWrapper<?>) wrapperConstructor.newInstance();
-                } else {
-                    wrapper = Wrappers.WRAPPERS.get(parameter.getType());
-                }
-
-                // check if a wrapper is present for the paramter type
-                if (wrapper == null) {
-                    System.out.printf("ERROR: cannot find wrapper for parameter type %s!%n",
-                        parameter.getType().getSimpleName());
-                    return;
-                }
-
                 final String prompt;
                 if (parameter.isAnnotationPresent(Prompt.class)) {
                     prompt = parameter.getAnnotation(Prompt.class).value();
@@ -73,7 +83,12 @@ public class EntryMethod {
                 }
 
                 // execute wrapper
-                parameters.add(wrapper.wrap(scanner, prompt, parameter));
+                parameters.add(promptValue(
+                    scanner,
+                    parameter.getType(),
+                    prompt,
+                    parameter::getAnnotation
+                ));
             }
         }
         System.out.println();
