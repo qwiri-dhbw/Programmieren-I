@@ -7,22 +7,22 @@ import io.d2a.dhbw._20220214.scratch.Rectangle;
 import io.d2a.dhbw.eeee.Starter;
 import io.d2a.dhbw.eeee.annotations.Default;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
+import io.d2a.dhbw.eeee.annotations.ForceRun;
 import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
 import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
-import io.d2a.dhbw.eeee.generate.Factory;
 import io.d2a.dhbw.eeee.inject.Inject;
-import io.d2a.dhbw.eeee.inject.Injector;
 import java.util.Scanner;
 
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        final Scanner scanner = new Scanner(System.in);
-        final Injector injector = new Injector()
-            .register(String[].class, args);
-        final Rectangle rect = Factory.createClass(scanner, Rectangle.class, injector);
-        System.out.println(rect);
+        Starter.start(Test.class, args);
+    }
+
+    @Entrypoint @ForceRun
+    public void test(@Prompt("Rect") final Rectangle rectangle) {
+        System.out.println(rectangle);
     }
 
     @Inject
