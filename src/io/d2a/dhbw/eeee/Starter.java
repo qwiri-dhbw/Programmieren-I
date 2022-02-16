@@ -1,6 +1,5 @@
 package io.d2a.dhbw.eeee;
 
-import io.d2a.dhbw._20220214.Test;
 import io.d2a.dhbw.eeee.annotations.Entrypoint;
 import io.d2a.dhbw.eeee.annotations.ForceRun;
 import io.d2a.dhbw.eeee.inject.Injector;
@@ -8,31 +7,49 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class Starter {
 
-    public static final Class<?> FIRST_ENTRY = Test.class;
+    public static void start(
+        final Class<?> clazz
+    ) throws Exception {
+        start(clazz, new String[0]);
+    }
 
-    ///
+    public static void start(
+        final Class<?> clazz,
+        final String[] args
+    ) throws Exception {
+        start(clazz, args, null);
+    }
 
-    public static void main(String[] args) throws Exception {
+    public static void start(
+        final Class<?> clazz,
+        final String[] args,
+        final Consumer<Injector> injectorSupplier
+    ) throws Exception {
         final Scanner scanner = new Scanner(System.in);
 
         final Injector injector = new Injector()
             .register(Scanner.class, scanner)
             .register(String[].class, args, "args");
 
+        if (injectorSupplier != null) {
+            injectorSupplier.accept(injector);
+        }
+
         final List<EntryMethod> methods = new ArrayList<>();
 
         // first, find any entrypoint method
-        for (final Method method : FIRST_ENTRY.getDeclaredMethods()) {
+        for (final Method method : clazz.getDeclaredMethods()) {
             // check if the method is an entrypoint
             if (!method.isAnnotationPresent(Entrypoint.class)) {
                 continue;
             }
             final Entrypoint entrypoint = method.getAnnotation(Entrypoint.class);
             final EntryMethod config = new EntryMethod(
-                method, entrypoint, FIRST_ENTRY
+                method, entrypoint, clazz
             );
             methods.add(config);
         }
@@ -45,7 +62,7 @@ public class Starter {
 
         // auto select first method if only one method exists in that class
         EntryMethod config = getForcedConfig(methods);
-        if (config == null && (config = select(scanner, methods)) == null) {
+        if (config == null && (config = select(clazz, scanner, methods)) == null) {
             System.out.println("Invalid run config.");
             return;
         }
@@ -64,14 +81,14 @@ public class Starter {
         return null;
     }
 
-    private static void printConfigs(final List<? extends EntryMethod> list) {
+    private static void printConfigs(final Class<?> clazz, final List<? extends EntryMethod> list) {
         // print method selection
         int i = 0;
         for (final EntryMethod method : list) {
             // print method number and name
             System.out.printf("%d. %s::%s@%s (%s)%n",
                 ++i,
-                FIRST_ENTRY.getSimpleName(),
+                clazz.getSimpleName(),
                 method.entrypoint.value(),
                 method.method.getName(),
                 formatTypes(method.method.getParameterTypes(), false)
@@ -79,13 +96,14 @@ public class Starter {
         }
     }
 
-    private static EntryMethod select(final Scanner scanner, final List<? extends EntryMethod> list) {
+    private static EntryMethod select(final Class<?> clazz, final Scanner scanner,
+        final List<? extends EntryMethod> list) {
         // if there's only 1 method to run, just select the first
         if (list.size() == 1) {
             return list.get(0);
         }
         while (true) {
-            printConfigs(list);
+            printConfigs(clazz, list);
             System.out.printf("[?] Select Method to run [1-%d]: ", list.size());
 
             final String line = scanner.nextLine().trim();
