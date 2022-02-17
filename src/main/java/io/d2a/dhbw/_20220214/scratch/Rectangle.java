@@ -1,12 +1,12 @@
 package io.d2a.dhbw._20220214.scratch;
 
-import io.d2a.dhbw.eeee.annotations.AnnotationProvider;
-import io.d2a.dhbw.eeee.annotations.Default;
-import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
-import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
-import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
-import io.d2a.dhbw.eeee.generate.Factory;
-import io.d2a.dhbw.eeee.wrapper.Wrapper;
+import io.d2a.eeee.annotations.AnnotationProvider;
+import io.d2a.eeee.annotations.Default;
+import io.d2a.eeee.annotations.parameters.Prompt;
+import io.d2a.eeee.annotations.parameters.number.Max;
+import io.d2a.eeee.annotations.parameters.number.Min;
+import io.d2a.eeee.generate.Factory;
+import io.d2a.eeee.wrapper.Wrapper;
 import java.util.Scanner;
 
 public class Rectangle implements Wrapper<Rectangle> {

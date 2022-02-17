@@ -4,14 +4,14 @@ import io.d2a.dhbw._20220214.clazz.Account;
 import io.d2a.dhbw._20220214.clazz.Point;
 import io.d2a.dhbw._20220214.clazz.Radio;
 import io.d2a.dhbw._20220214.scratch.Rectangle;
-import io.d2a.dhbw.eeee.Starter;
-import io.d2a.dhbw.eeee.annotations.Default;
-import io.d2a.dhbw.eeee.annotations.Entrypoint;
-import io.d2a.dhbw.eeee.annotations.ForceRun;
-import io.d2a.dhbw.eeee.annotations.parameters.Prompt;
-import io.d2a.dhbw.eeee.annotations.parameters.number.Max;
-import io.d2a.dhbw.eeee.annotations.parameters.number.Min;
-import io.d2a.dhbw.eeee.inject.Inject;
+import io.d2a.eeee.Starter;
+import io.d2a.eeee.annotations.Default;
+import io.d2a.eeee.annotations.Entrypoint;
+import io.d2a.eeee.annotations.ForceRun;
+import io.d2a.eeee.annotations.parameters.Prompt;
+import io.d2a.eeee.annotations.parameters.number.Max;
+import io.d2a.eeee.annotations.parameters.number.Min;
+import io.d2a.eeee.inject.Inject;
 import java.util.Scanner;
 
 public class Test {
