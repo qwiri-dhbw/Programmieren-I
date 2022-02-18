@@ -27,7 +27,6 @@ public class Test {
     }
 
     @Entrypoint
-    @ForceRun
     public void complex() throws Exception {
         final Complex c1 = new Complex(1, 2);
         final Complex c2 = new Complex(2, 1);

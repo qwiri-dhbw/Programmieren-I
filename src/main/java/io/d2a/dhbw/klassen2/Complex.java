@@ -8,10 +8,7 @@ public class Complex {
     private final double b;
 
     @Generate
-    public Complex(
-        final double a,
-        final double b
-    ) {
+    public Complex(final double a, final double b) {
         this.a = a;
         this.b = b;
     }

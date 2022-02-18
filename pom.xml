@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.github.darmiel</groupId>
             <artifactId>eeee</artifactId>
-            <version>main-4c35fff2b1-1</version>
+            <version>main-451e5729b5-1</version>
         </dependency>
     </dependencies>
 
