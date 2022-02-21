@@ -1,9 +1,8 @@
 package io.d2a.dhbw.klassen2;
 
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotations.Entrypoint;
-import io.d2a.eeee.annotations.ForceRun;
-import io.d2a.eeee.generate.placeholder.RandomFactory;
+import io.d2a.eeee.annotation.annotations.Entrypoint;
+import io.d2a.eeee.generate.random.RandomFactory;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -14,7 +13,7 @@ public class Test {
     }
 
     @Entrypoint
-    public void poly() {
+    public void poly() throws NoSuchMethodException {
         final Polynomial a = new Polynomial(2.0, 0, 0);
         final Polynomial b = new Polynomial(0.0, -4, 1);
         System.out.println("P1: " + a);
@@ -45,7 +44,7 @@ public class Test {
         System.out.println("C1 < C2: " + c1lc2);
 
         final Complex[] complexes = new Complex[10];
-        RandomFactory.fillArrayRandom(complexes, Complex.class);
+        RandomFactory.fillArrayRandom(complexes);
 
         System.out.println("Unsortiert:");
         for (final Complex complex : complexes) {

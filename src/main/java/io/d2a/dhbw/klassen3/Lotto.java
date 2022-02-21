@@ -1,7 +1,5 @@
 package io.d2a.dhbw.klassen3;
 
-import io.d2a.eeee.generate.placeholder.Generators;
-import io.d2a.eeee.generate.placeholder.RandomFactory;
 import io.d2a.eeee.wrapper.Wrappers;
 import java.util.Random;
 import java.util.Scanner;

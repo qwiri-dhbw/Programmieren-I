@@ -1,9 +1,9 @@
 package io.d2a.dhbw.klassen3;
 
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotations.Entrypoint;
-import io.d2a.eeee.annotations.ForceRun;
-import io.d2a.eeee.annotations.parameters.Prompt;
+import io.d2a.eeee.annotation.annotations.Entrypoint;
+import io.d2a.eeee.annotation.annotations.ForceRun;
+import io.d2a.eeee.annotation.annotations.Prompt;
 import io.d2a.eeee.wrapper.Wrappers;
 import java.util.Arrays;
 import java.util.Random;
@@ -18,7 +18,8 @@ public class Main {
         Starter.start(Main.class, args);
     }
 
-    @Entrypoint @ForceRun
+    @Entrypoint
+    @ForceRun
     public void mm(final Scanner scanner) {
         // generate random word
         final char[] word = new char[5];

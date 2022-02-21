@@ -1,6 +1,6 @@
 package io.d2a.dhbw.klassen2;
 
-import io.d2a.eeee.annotations.generate.Generate;
+import io.d2a.eeee.annotation.annotations.Generate;
 
 public class Complex {
 
@@ -60,4 +60,5 @@ public class Complex {
     public double getImag() {
         return this.b;
     }
+
 }

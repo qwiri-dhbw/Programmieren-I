@@ -1,5 +1,7 @@
 package io.d2a.dhbw.klassen2;
 
+import io.d2a.eeee.annotation.annotations.Generate;
+
 public class Polynomial {
 
     private final double a;
@@ -17,6 +19,7 @@ public class Polynomial {
             sign(this.c), Math.abs(this.c));
     }
 
+    @Generate
     public Polynomial(final double a, final double b, final double c) {
         this.a = a;
         this.b = b;
@@ -52,14 +55,8 @@ public class Polynomial {
     }
 
     @Deprecated
-    public double[] zeroes() {
-        final double a = -(this.b / 2) + Math.sqrt(
-            (this.b / 2) * (this.b / 2) - this.c
-        );
-        final double b = -(this.b / 2) - Math.sqrt(
-            (this.b / 2) * (this.b / 2) - this.c
-        );
-        return new double[]{a, b};
+    public double[] zeroes() throws NoSuchMethodException {
+        throw new NoSuchMethodException("not implemented yet.");
     }
 
 }

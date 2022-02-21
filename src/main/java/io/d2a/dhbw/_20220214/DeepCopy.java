@@ -1,4 +1,4 @@
-package io.d2a.dhbw._20220214.scratch;
+package io.d2a.dhbw._20220214;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -7,6 +7,7 @@ import java.lang.reflect.Modifier;
 
 public class DeepCopy {
 
+    @SuppressWarnings("unchecked")
     public static <T> T deepCopy(final T in, final Class<T> clazz) throws Exception {
         // check if in is cloneable
         if (Cloneable.class.isAssignableFrom(clazz)) {
