@@ -23,7 +23,9 @@ public class RomanNumber {
     ///
 
     public static void main(String[] args) throws Exception {
-        while(true) Starter.start(RomanNumber.class, args);
+        while (true) {
+            Starter.start(RomanNumber.class, args);
+        }
     }
 
     ///
@@ -38,21 +40,25 @@ public class RomanNumber {
         for (int i = 0; i < chars.length; i++) {
             final int currentValue = VALUES.get(chars[i]);
 
-            final int nextValue;
-            if ((i + 1) < chars.length) {
-                nextValue = VALUES.get(chars[i + 1]);
-            } else {
-                nextValue = 0;
+            boolean add = true;
+            for (int j = i; j < chars.length; j++) {
+                final int nextValue = VALUES.get(chars[j]);
+                if (nextValue > currentValue) {
+                    add = false;
+                    break;
+                } else if (nextValue < currentValue) {
+                    break;
+                }
             }
 
-            if (currentValue >= nextValue) {
+            if (add) {
                 res += currentValue;
             } else {
                 res -= currentValue;
             }
 
             if (VERBOSE) {
-                final String mode = currentValue >= nextValue ? "add" : "sub";
+                final String mode = add ? "add" : "sub";
                 System.out.printf("%c | %4d | %3s | %4d%n",
                     chars[i], currentValue, mode, res);
             }
