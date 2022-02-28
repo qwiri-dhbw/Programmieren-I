@@ -1,10 +1,12 @@
 package io.d2a.dhbw.klassen3;
 
+import io.d2a.dhbw._20220207.E;
 import io.d2a.eeee.Starter;
 import io.d2a.eeee.annotation.annotations.Entrypoint;
 import io.d2a.eeee.annotation.annotations.ForceRun;
 import io.d2a.eeee.annotation.annotations.Prompt;
-import io.d2a.eeee.wrapper.Wrappers;
+import io.d2a.eeee.annotation.provider.EmptyAnnotationProvider;
+import io.d2a.eeee.nw.Wrappers;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -69,7 +71,7 @@ public class Main {
         final int numberPlayers,
         @Prompt("Wie viele Haufen?")
         final int numberHaufen
-    ) {
+    ) throws Exception {
         final Random random = new Random();
 
         final int[] haufen = new int[numberHaufen];
@@ -79,7 +81,12 @@ public class Main {
 
         final String[] names = new String[numberPlayers];
         for (int i = 0; i < names.length; i++) {
-            names[i] = Wrappers.prompt(scanner, String.class, "Name Spieler " + (i + 1));
+            names[i] = Wrappers.requestValue(
+                scanner,
+                String.class,
+                "Name Spieler " + (i + 1),
+                EmptyAnnotationProvider.DEFAULT
+            );
         }
 
         final Nimmspiel nimmspiel = new Nimmspiel(haufen, names);
@@ -91,10 +98,11 @@ public class Main {
 
             int h;
             while (true) {
-                h = Wrappers.prompt(
+                h = Wrappers.requestValue(
                     scanner,
                     int.class,
-                    "Von welchem Haufen moechtest du eine Kugel nehmen?"
+                    "Von welchem Haufen moechtest du eine Kugel nehmen?",
+                    EmptyAnnotationProvider.DEFAULT
                 );
                 if (h >= 0 && h < haufen.length) {
                     if (haufen[h] == 0) {
@@ -108,10 +116,11 @@ public class Main {
 
             int num;
             while (true) {
-                num = Wrappers.prompt(
+                num = Wrappers.requestValue(
                     scanner,
                     int.class,
-                    "Wie viele Kugeln?"
+                    "Wie viele Kugeln?",
+                    EmptyAnnotationProvider.DEFAULT
                 );
                 if (num > 0 && num <= haufen[h]) {
                     break;

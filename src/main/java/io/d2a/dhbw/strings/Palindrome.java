@@ -3,8 +3,6 @@ package io.d2a.dhbw.strings;
 import io.d2a.eeee.Starter;
 import io.d2a.eeee.annotation.annotations.Entrypoint;
 import io.d2a.eeee.annotation.annotations.Prompt;
-import io.d2a.eeee.annotation.annotations.Transform;
-import io.d2a.eeee.annotation.annotations.Transform.Type;
 
 public class Palindrome {
 
@@ -14,10 +12,10 @@ public class Palindrome {
     }
 
     public static void main(String[] args) throws Exception {
-        while (true) Starter.start(Palindrome.class, args);
+        Starter.start(Palindrome.class, args);
     }
 
-    @Entrypoint(verbose = false, stopwatch = false)
+    @Entrypoint(loop = true)
     public void run(@Prompt("Eingabe") final String inp) {
         System.out.printf("Die Eingabe ist %s Palindrome.%n",
             isPalindrome(inp) ? "ein" : "kein");

@@ -44,7 +44,7 @@ public class Test {
         System.out.println("C1 < C2: " + c1lc2);
 
         final Complex[] complexes = new Complex[10];
-        RandomFactory.fillArrayRandom(complexes);
+        RandomFactory.fill(complexes);
 
         System.out.println("Unsortiert:");
         for (final Complex complex : complexes) {

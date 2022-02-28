@@ -2,6 +2,7 @@ package io.d2a.dhbw.strings;
 
 import io.d2a.eeee.Starter;
 import io.d2a.eeee.annotation.annotations.Entrypoint;
+import io.d2a.eeee.annotation.annotations.Pattern;
 import io.d2a.eeee.annotation.annotations.Prompt;
 
 public class CrossTotal {
@@ -13,14 +14,15 @@ public class CrossTotal {
     public static int quersumme(final String in) {
         int res = 0;
         for (final char c : in.toCharArray()) {
-            res += c - 48;
+            res += c - '0';
         }
         return res;
     }
 
-    @Entrypoint(verbose = false, stopwatch = false)
+    @Entrypoint
     public void run(
-        @Prompt("Bitte Zahl fuer Quersumme eingeben") final String inp
+        @Prompt("Bitte Zahl fuer Quersumme eingeben") @Pattern("^\\d+$")
+        final String inp
     ) {
         System.out.printf("Quersumme von %s ist %d%n", inp, quersumme(inp));
     }

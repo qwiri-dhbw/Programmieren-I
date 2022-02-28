@@ -1,6 +1,7 @@
 package io.d2a.dhbw.klassen3;
 
-import io.d2a.eeee.wrapper.Wrappers;
+import io.d2a.eeee.annotation.provider.EmptyAnnotationProvider;
+import io.d2a.eeee.nw.Wrappers;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,16 +18,17 @@ public class Lotto {
         this.aus = n;
     }
 
-    public int[] tippen() {
+    public int[] tippen() throws Exception {
         final Scanner scanner = new Scanner(System.in);
         final int[] tips = new int[this.m];
         for (int i = 0; i < m; i++) {
             while (true) {
                 // get i-th tip
-                tips[i] = Wrappers.prompt(
+                tips[i] = Wrappers.requestValue(
                     scanner,
                     int.class,
-                    String.format("Dein %d-ter Tipp", (i + 1))
+                    String.format("Dein %d-ter Tipp", (i + 1)),
+                    EmptyAnnotationProvider.DEFAULT
                 );
                 if (tips[i] <= 0 || tips[i] > this.aus) {
                     System.out.println("Ungueltiger Tipp.");

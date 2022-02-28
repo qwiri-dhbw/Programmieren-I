@@ -2,13 +2,18 @@ package io.d2a.dhbw.strings;
 
 import io.d2a.eeee.Starter;
 import io.d2a.eeee.annotation.annotations.Entrypoint;
+import io.d2a.eeee.annotation.annotations.Pattern;
 import io.d2a.eeee.annotation.annotations.Prompt;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RomanNumber {
 
-    public static final boolean VERBOSE = true;
+    public static void main(String[] args) throws Exception {
+        Starter.start(RomanNumber.class, args);
+    }
+
+    /// MCMLXXXIV
 
     public static final Map<Character, Integer> VALUES = new HashMap<>() {{
         put('M', 1000);
@@ -20,19 +25,10 @@ public class RomanNumber {
         put('I', 1);
     }};
 
-    ///
-
-    public static void main(String[] args) throws Exception {
-        while (true) {
-            Starter.start(RomanNumber.class, args);
-        }
-    }
-
-    ///
-
-    @Entrypoint(verbose = VERBOSE, stopwatch = false)
+    @Entrypoint(loop = true)
     public void run(
-        @Prompt("Roemische Number") final String input
+        @Prompt("Roemische Number") @Pattern("^[MDCLXVI]+$")
+        final String input
     ) {
         final char[] chars = input.toCharArray();
 
@@ -57,11 +53,9 @@ public class RomanNumber {
                 res -= currentValue;
             }
 
-            if (VERBOSE) {
-                final String mode = add ? "add" : "sub";
-                System.out.printf("%c | %4d | %3s | %4d%n",
-                    chars[i], currentValue, mode, res);
-            }
+            final String mode = add ? "add" : "sub";
+            System.out.printf("%c | %4d | %3s | %4d%n",
+                chars[i], currentValue, mode, res);
         }
 
         System.out.printf("%s = %d.%n", input, res);
