@@ -1,8 +1,5 @@
 package io.d2a.dhbw._20220207;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 public class BubbleSort {

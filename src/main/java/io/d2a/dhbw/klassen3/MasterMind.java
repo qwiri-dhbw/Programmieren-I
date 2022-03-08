@@ -1,7 +1,5 @@
 package io.d2a.dhbw.klassen3;
 
-import java.util.stream.Stream;
-
 public class MasterMind {
 
     private final char[] correct;

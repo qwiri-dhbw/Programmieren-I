@@ -1,7 +1,6 @@
 package io.d2a.dhbw._20220207;
 
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class MatrixSubtraction {
 

@@ -1,7 +1,6 @@
 package io.d2a.dhbw._20220207;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 

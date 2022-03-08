@@ -1,6 +1,5 @@
 package io.d2a.dhbw.wechselspiel;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
