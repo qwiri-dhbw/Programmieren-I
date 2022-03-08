@@ -1,7 +1,10 @@
 package io.d2a.dhbw.classes.periodic;
 
+import io.d2a.eeee.table.Column;
+import io.d2a.eeee.table.HeaderOrder;
 import java.util.Objects;
 
+@HeaderOrder({"Name", "Symbol", "Ordinal", "Shell", "Phase", "Group"})
 public class Element {
 
     public static final int PHASE_SOLID = 1;
@@ -11,11 +14,22 @@ public class Element {
     public static final boolean GROUP_MAIN = true;
     public static final boolean GROUP_SIDE = false;
 
+    @Column("Name")
     private final String name;
+
+    @Column("Symbol")
     private final String symbol;
+
+    @Column("Ordinal")
     private final int ordinal;
+
+    @Column("Shell")
     private final char shell;
+
+    @Column("Phase")
     private final int phase;
+
+    @Column("Group")
     private final boolean group;
 
     public Element(final String name, final String symbol, final int ordinal, final char shell,
@@ -31,7 +45,7 @@ public class Element {
     @Override
     public String toString() {
         return String.format(
-            "%s (%s,%d) Schale: %c, %s, Gruppe: %s, \uF073: %f",
+            "%s (%s,%d) Schale: %c, %s, Gruppe: %s",
             this.name, this.symbol, this.ordinal, this.shell,
             this.phase == PHASE_SOLID ? "fest" : this.phase == PHASE_GAS ? "gas" : "fluessig",
             this.group == GROUP_MAIN ? "Hauptgruppe" : "Nebengruppe"
@@ -74,5 +88,9 @@ public class Element {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    public boolean isGroup() {
+        return group;
     }
 }

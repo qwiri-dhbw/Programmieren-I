@@ -1,12 +1,11 @@
 package io.d2a.dhbw.klassen3;
 
-import io.d2a.dhbw._20220207.E;
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotation.annotations.Entrypoint;
-import io.d2a.eeee.annotation.annotations.ForceRun;
-import io.d2a.eeee.annotation.annotations.Prompt;
+import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.ForceRun;
+import io.d2a.eeee.annotation.annotations.prompt.Prompt;
 import io.d2a.eeee.annotation.provider.EmptyAnnotationProvider;
-import io.d2a.eeee.nw.Wrappers;
+import io.d2a.eeee.prompt.Wrappers;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;

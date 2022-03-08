@@ -1,6 +1,7 @@
 package io.d2a.dhbw.klassen2;
 
-import io.d2a.eeee.annotation.annotations.Generate;
+
+import io.d2a.eeee.annotation.annotations.generate.Generate;
 
 public class Polynomial {
 

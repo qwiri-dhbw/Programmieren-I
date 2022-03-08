@@ -1,7 +1,7 @@
 package io.d2a.dhbw.klassen3;
 
 import io.d2a.eeee.annotation.provider.EmptyAnnotationProvider;
-import io.d2a.eeee.nw.Wrappers;
+import io.d2a.eeee.prompt.Wrappers;
 import java.util.Random;
 import java.util.Scanner;
 

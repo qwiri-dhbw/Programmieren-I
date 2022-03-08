@@ -4,10 +4,10 @@ import io.d2a.dhbw._20220214.clazz.Account;
 import io.d2a.dhbw._20220214.clazz.Point;
 import io.d2a.dhbw._20220214.clazz.Radio;
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotation.annotations.Default;
-import io.d2a.eeee.annotation.annotations.Entrypoint;
-import io.d2a.eeee.annotation.annotations.Prompt;
-import io.d2a.eeee.annotation.annotations.Range;
+import io.d2a.eeee.annotation.annotations.prompt.Default;
+import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.Prompt;
+import io.d2a.eeee.annotation.annotations.common.Range;
 import io.d2a.eeee.inject.Inject;
 import java.util.Scanner;
 

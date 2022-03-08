@@ -1,9 +1,9 @@
 package io.d2a.dhbw.methoden;
 
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotation.annotations.Entrypoint;
-import io.d2a.eeee.annotation.annotations.Prompt;
-import io.d2a.eeee.annotation.annotations.Range;
+import io.d2a.eeee.annotation.annotations.common.Range;
+import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.Prompt;
 import io.d2a.eeee.converter.StringConverter;
 
 public class Exponentiation {
@@ -19,7 +19,7 @@ public class Exponentiation {
         Starter.start(Exponentiation.class, args);
     }
 
-    @Entrypoint(verbose = false, stopwatch = false)
+    @Entrypoint
     public void run(
         @Prompt("Geben Sie bitte die Basis ein")
         final double x,

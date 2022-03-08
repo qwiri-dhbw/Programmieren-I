@@ -1,7 +1,7 @@
 package io.d2a.dhbw.klassen2;
 
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotation.annotations.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
 import io.d2a.eeee.generate.random.RandomFactory;
 import java.util.Arrays;
 import java.util.stream.Stream;

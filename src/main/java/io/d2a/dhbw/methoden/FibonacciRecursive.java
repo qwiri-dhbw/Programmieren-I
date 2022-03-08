@@ -1,14 +1,13 @@
 package io.d2a.dhbw.methoden;
 
 import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotation.annotations.Entrypoint;
-import io.d2a.eeee.annotation.annotations.Prompt;
-import io.d2a.eeee.annotation.annotations.Range;
-import io.d2a.eeee.converter.StringConverter;
+import io.d2a.eeee.annotation.annotations.common.Range;
+import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.Prompt;
 
 public class FibonacciRecursive {
 
-    public static int fib(int n) {
+    private int fib(int n) {
         if (n <= 0) {
             return 1;
         }
@@ -19,7 +18,7 @@ public class FibonacciRecursive {
         Starter.start(FibonacciRecursive.class, args);
     }
 
-    @Entrypoint(verbose = false, stopwatch = false)
+    @Entrypoint
     public void run(
         @Prompt("Wie viele Fibonacci-Zahlen berechnen") @Range({0, 100})
         final int x
