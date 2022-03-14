@@ -2,9 +2,9 @@ package io.d2a.dhbw.io;
 
 import io.d2a.eeee.Starter;
 import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.Pattern;
 import io.d2a.eeee.annotation.annotations.prompt.Prompt;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,12 +12,12 @@ import java.nio.file.Files;
 public class PalindromeFile {
 
     public static void main(final String[] args) throws Exception {
-        Starter.start(PalindromeFile.class, args);
+        Starter.byCaller();
     }
 
     @Entrypoint(loop = true)
     public void run(
-        @Prompt("Bitte Wort eingeben") final String word
+        @Prompt("Bitte Wort eingeben") @Pattern("^[\\w]+$") final String word
     ) throws IOException {
         final File file = new File("palindromes.txt");
         assert file.exists() || file.createNewFile();
