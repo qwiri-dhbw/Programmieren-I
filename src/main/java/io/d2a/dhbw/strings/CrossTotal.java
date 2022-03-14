@@ -4,6 +4,12 @@ import io.d2a.eeee.Starter;
 import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
 import io.d2a.eeee.annotation.annotations.prompt.Pattern;
 import io.d2a.eeee.annotation.annotations.prompt.Prompt;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CrossTotal {
 
@@ -19,12 +25,21 @@ public class CrossTotal {
         return res;
     }
 
-    @Entrypoint
+    @Entrypoint(loop = true)
     public void run(
         @Prompt("Bitte Zahl fuer Quersumme eingeben") @Pattern("^\\d+$")
         final String inp
-    ) {
-        System.out.printf("Quersumme von %s ist %d%n", inp, quersumme(inp));
+    ) throws IOException {
+        final int res = quersumme(inp);
+        System.out.printf("Quersumme von %s ist %d%n", inp, res);
+
+        // write result to file
+        final File file = new File("crosstotals.txt");
+        assert file.exists() || file.createNewFile();
+
+        try (final FileWriter writer = new FileWriter(file, true)) {
+            writer.append(String.format("Quersumme von %s ist %d.%n", inp, res));
+        }
     }
 
 }
