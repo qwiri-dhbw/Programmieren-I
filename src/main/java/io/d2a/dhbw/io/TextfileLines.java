@@ -1,33 +1,27 @@
 package io.d2a.dhbw.io;
 
 import io.d2a.eeee.Starter;
+import io.d2a.eeee.annotation.annotations.prompt.Default;
 import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
+import io.d2a.eeee.annotation.annotations.prompt.Prompt;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
 
 public class TextfileLines {
 
     private static final File file = new File("beispiel.txt");
 
-    static {
-        try {
-            assert file.exists() || file.createNewFile();
-        } catch (final IOException ignored) {
-        }
-    }
-
     public static void main(final String[] args) throws Exception {
+        assert file.exists() || file.createNewFile();
         Starter.start(TextfileLines.class, args);
     }
 
     @Entrypoint
-    public void run() throws IOException {
-
-        final int start = 2;
-        final int end = 5;
-
+    public void run(
+        @Prompt("start") @Default("2") final int start,
+        @Prompt("end") @Default("5") final int end
+    ) throws IOException {
         final String[] lines = Files.readAllLines(file.toPath())
             .toArray(new String[0]);
 

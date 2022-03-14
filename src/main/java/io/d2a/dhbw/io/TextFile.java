@@ -1,13 +1,10 @@
 package io.d2a.dhbw.io;
 
-import io.d2a.eeee.Starter;
-import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TextFile implements AutoCloseable, Closeable {
@@ -16,16 +13,14 @@ public class TextFile implements AutoCloseable, Closeable {
 
     private List<String> content = new ArrayList<>();
 
+    ///
+
     public TextFile(final File file) {
         this.file = file;
     }
 
     public TextFile(final String fileName) {
         this.file = new File(fileName);
-    }
-
-    private TextFile() { // just used for EEEE
-        this.file = new File("error");
     }
 
     ///
@@ -68,21 +63,6 @@ public class TextFile implements AutoCloseable, Closeable {
     public void close() throws IOException {
         this.content.clear();
         // cannot close file o.0
-    }
-
-    public static void main(final String[] args) throws Exception {
-        Starter.start(TextFile.class, args);
-    }
-
-    @Entrypoint
-    public void run() throws IOException {
-        final File file = new File("bla.txt");
-        final TextFile textFile = new TextFile(file);
-        textFile.read();
-
-        System.out.println(Arrays.toString(textFile.getLines()));
-        textFile.replaceAll("meine", "unsre");
-        System.out.println(Arrays.toString(textFile.getLines()));
     }
 
 }
