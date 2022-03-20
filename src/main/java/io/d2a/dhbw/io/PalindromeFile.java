@@ -5,9 +5,10 @@ import io.d2a.eeee.annotation.annotations.prompt.Entrypoint;
 import io.d2a.eeee.annotation.annotations.prompt.Pattern;
 import io.d2a.eeee.annotation.annotations.prompt.Prompt;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.util.Scanner;
 
 public class PalindromeFile {
 
@@ -17,25 +18,33 @@ public class PalindromeFile {
 
     @Entrypoint(loop = true)
     public void run(
-        @Prompt("Bitte Wort eingeben") @Pattern("^[\\w]+$") final String word
+        @Prompt("Wort") @Pattern("^[\\w]+$") final String word
     ) throws IOException {
-        final File file = new File("palindromes.txt");
-        assert file.exists() || file.createNewFile();
 
-        // get reversed word
+        final File file = new File("palindromes.txt");
+        // check if file exists and create if not
+        if (!file.exists() && !file.createNewFile()) {
+            throw new IOException("cannot create file");
+        }
+
         final String reversed = new StringBuilder(word).reverse().toString();
         if (reversed.equalsIgnoreCase(word)) {
-            System.out.printf("%s ist ein Palindrom!%n", word);
-
-            // write word to file
+            System.out.printf("👏 %s ist ein Palindrom!%n%n", word);
             try (final FileWriter writer = new FileWriter(file, true)) {
                 writer.write(word.toLowerCase() + "\n");
             }
+        } else {
+            System.out.printf("🫠 %s ist kein Palindrom!%n%n", word);
         }
 
-        // read all word from file
         System.out.println("Alle bisher gefundenen Palindrome:");
-        Files.readAllLines(file.toPath()).forEach(System.out::println);
+        try (final Scanner scanner = new Scanner(new FileInputStream(file))) {
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+        }
+
+        // Files.readAllLines(file.toPath()).forEach(System.out::println);
     }
 
 }

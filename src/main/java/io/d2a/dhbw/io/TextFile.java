@@ -53,9 +53,8 @@ public class TextFile implements AutoCloseable, Closeable {
     }
 
     public void replaceAll(final String haystack, final String needle) {
-        final List<String> copy = new ArrayList<>(this.content);
-        for (int i = 0; i < copy.size(); i++) {
-            this.content.set(i, copy.get(i).replaceAll(haystack, needle));
+        for (int i = 0; i < this.content.size(); i++) {
+            this.content.set(i, this.content.get(i).replaceAll(haystack, needle));
         }
     }
 

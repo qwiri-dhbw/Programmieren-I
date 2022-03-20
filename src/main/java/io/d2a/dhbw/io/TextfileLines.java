@@ -10,10 +10,7 @@ import java.nio.file.Files;
 
 public class TextfileLines {
 
-    private static final File file = new File("beispiel.txt");
-
     public static void main(final String[] args) throws Exception {
-        assert file.exists() || file.createNewFile();
         Starter.start(TextfileLines.class, args);
     }
 
@@ -22,6 +19,9 @@ public class TextfileLines {
         @Prompt("start") @Default("2") final int start,
         @Prompt("end") @Default("5") final int end
     ) throws IOException {
+        final File file = new File("beispiel.txt");
+        assert file.exists() || file.createNewFile();
+
         final String[] lines = Files.readAllLines(file.toPath())
             .toArray(new String[0]);
 
@@ -30,7 +30,6 @@ public class TextfileLines {
 
         System.out.println(String.join("\n", relevant));
         System.out.println("Zeile 2 - 5: " + String.join("", relevant));
-
     }
 
 }
