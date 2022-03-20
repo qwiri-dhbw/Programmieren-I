@@ -10,19 +10,18 @@ import java.io.IOException;
 
 public class JTail {
 
-    private static final StringFlag fileFlag = new StringFlag("file");
     private static final LongFlag linesFlag = new LongFlag("lines");
     private static final LongFlag bytesFlag = new LongFlag("bytes");
 
     public static void main(String[] args) throws JTailException {
-        Flags.parse(args);
+        final String[] argArguments = Flags.parse(args);
 
         // check required flag
-        final String fileName = fileFlag.get();
-        if (fileName == null || fileName.isBlank()) {
+        if (argArguments.length == 0 || argArguments[0].isBlank()) {
             System.out.println("--file required.");
             return;
         }
+        final String fileName = argArguments[0];
 
         // check if specified file exists
         final File file = new File(fileName);
